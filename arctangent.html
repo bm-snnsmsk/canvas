@@ -42,8 +42,7 @@ window.onload = function(){
         
     render() ;
     function render(){
-        ctx.clearRect(0, 0, w, h) ;
-        
+        ctx.clearRect(0, 0, w, h) ;        
 
         ctx.save() ;        
         ctx.translate(arrowX, arrowY) ;
@@ -56,19 +55,13 @@ window.onload = function(){
         ctx.lineTo(10, -10) ;
         ctx.moveTo(20, 0) ;
         ctx.lineTo(10, 10) ;
-        ctx.stroke() ;
-
-
-        
+        ctx.stroke() ;        
         
         //angle += speed ;
 
-
         ctx.restore() ;
         requestAnimationFrame(render) ;
-    }
-  
-    
+    }    
 
     document.body.addEventListener("mousemove", (e) => {
         dx = e.clientX - arrowX ;

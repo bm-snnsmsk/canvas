@@ -11,17 +11,27 @@
             padding: 0;
         }
         canvas{
+            margin: 10px auto;
             display: block;
+            border:1px solid #3514ee;
+            padding:0;
         }
         table{
             margin: 0 0 50px 50px;
         }
+        p{
+            width: 80%;
+            margin: 0 auto;
+            border: 1px solid #f66;
+            min-height: 100px;
+            padding: 3px 5px;
+        }
     </style>
 </head>
 <body>
-
-    <canvas id="canvas" width="500" height="300"></canvas>
-    <p id="test"></p>
+   <p id="test"></p>
+    <canvas id="canvas" width="600" height="500"></canvas>
+ 
   
     
 
@@ -31,18 +41,79 @@
 window.onload = function(){
     let cnv = document.querySelector('#canvas') ,
         ctx = cnv.getContext("2d")  ,
-        w = cnv.width = window.innerWidth ,
-        h = cnv.height = window.innerHeight ;
+        w = cnv.width ,
+        h = cnv.height ;
    
-        
+        let message = "" ; 
+        let  txt = "sinan şimşek" ;
+ 
 
+
+
+
+
+
+
+
+  // canvas içinde dönen yazı   START
+/*   
+ vx = 10 ;
+ vy = 10 ;
+
+ px = Math.random() * w ;
+ py =  Math.random() * h ;
+function test(){
+    ctx.clearRect(0,0,w,h) ;
+    ctx.fillStyle="rgba(255,0,0)" ;
+
+    ctx.beginPath() ;
+    ctx.font= "30px Arial" ;
+    ctx.fillText(txt, px, py) ;
+    wd = ctx.measureText(txt).width ;
+    
+    px += -vx ;
+    py += -vy ;
+    
+    if((px ) < 0){
+        vx = -vx ;
+    }
+    if((px + wd) > w){
+        vx = -vx ;
+    }
+    if(py < 30){
+        vy = -vy ;
+    }
+    if(py >= h){
+        vy = -vy ;
+    }
+
+
+}
+setInterval(test, 50) ;
+ */
+  // canvas içinde dönen yazı END
+
+
+ // radyan değerleri START
  /*        
    for(let angle = 0 ; angle <= 360 ; angle+=.1){
     rad = angle * Math.PI / 180 ;
     console.log(angle + " - "+Math.sin(rad)) ;
    }
  */
- document.body.addEventListener('keydown' , function(e){
+ /*   for(let angle = 0 ; angle <= 360 ; angle+=30){
+    rad = angle * Math.PI / 180 ;
+    message += angle.toFixed(2) + " / "+Math.sin(rad).toFixed(4) + "<br/>" ;
+   }
+ */
+  
+ // radyan değerleri END
+
+
+
+
+ // keycode değerleri START
+/*  document.body.addEventListener('keydown' , function(e){
         console.log(e.keyCode) ;
         switch(e.keyCode){
             case 37 :console.log("sol") ; break ; // left
@@ -51,8 +122,74 @@ window.onload = function(){
             case 40 : console.log("aşağı") ; break ;  // down
         }
    }) ;
-   
+   */
+ // keycode değerleri END
+
+
+
+
+
+   // globalAlpha START
+/* 
+let r = 10 ;
+let g = 250 ;
+let b = 100 ;
+
+        for(let angle = 0 ; angle <= 360 ; angle+=30){
+
+        rad = angle * Math.PI / 180 ;
+
+        x = 200 + Math.cos(rad) * 100 ; 
+        y = 200 + Math.sin(rad) * 100 ;  
+ 
+        ctx.beginPath() ;
+        ctx.fillStyle="rgba("+r+","+g+","+b+")" ;
+        r+=20 ;
+        g-=10 ;
+        b+=5;
+        ctx.arc(x, y, 10, 0,  Math.PI * 2, false) ;
+        ctx.fill() ;
+       
+
+    message += x.toFixed(2) + " / "+y.toFixed(4) +"<br/>" ;
+   }
+
+ */
+// globalAlpha END
+
+
+ // save() ve restore() START
+/* 
+ px = 300 ;
+ vx = 10 ;
+ py = 300 ;
+ vy = 10 ;
+function test(){
+    ctx.clearRect(0,0,w,h) ;
+
+    ctx.save() ;
+    ctx.fillStyle="rgba(255,0,0)" ;
+    ctx.globalAlpha = "0.6" ;
+ctx.beginPath() ;
+ctx.fillRect(0,0,200,200) ;
+
+ctx.restore() ;
+
+
+ctx.beginPath() ;
+ctx.fillStyle="rgba(0,0,255)" ;
+ctx.fillRect(px,py,200,200) ;
+px -= vx ;
+py -= vy ;
 }
+setInterval(test, 60);
+ */
+ // save() ve restore() END
+
+
+
+document.querySelector('#test').innerHTML = message ;
+} 
 
 
 
