@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seken Top</title>
+    <title>Dikey Yönde Seken Top</title>
     <style>
         *{
             margin:0;
@@ -25,11 +25,11 @@ window.onload = function(){
     let cnv = document.querySelector('#canvas') ,
         ctx = cnv.getContext("2d")  ,
         w = cnv.width = window.innerWidth ,
-        h = cnv.height = window.innerWidth ;
+        h = cnv.height = window.innerHeight ;
 
     let centerY = h * .5,
         centerX = w * .5,
-        offset = h * .4, // y ekseninde tavan-taban 
+        offset = h * .2, // y ekseninde tavan-taban 
         speed = .1 , // topun sekme hızı
         angle = 0 ;
         

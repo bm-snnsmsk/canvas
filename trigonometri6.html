@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>moveTo</title>
+    <title>Saat yörüngesinde hareket eden Daire</title>
     <style>
         *{
             margin:0;
@@ -18,24 +18,38 @@
 <body>
 
     <canvas id="canvas" width="500" height="300"></canvas>
+    <p id="test"></p>
 
 <script>
+    // degrees = radians * 180 / Math.PI
 window.onload = function(){
     let cnv = document.querySelector('#canvas') ,
         ctx = cnv.getContext("2d")  ,
         w = cnv.width = window.innerWidth ,
         h = cnv.height = window.innerHeight ;
+    
+    let centerY = h * .5,
+        centerX = w * .5,
+        radius = 200,
+        speed = .01 , 
+        angle = 0,
+        x, y;
+        
+    render() ;
 
-
-
-    for(let i=0; i<1000; i++){
+    function render(){
+        ctx.clearRect(0,0,w,h) ;
+        x = centerX + Math.cos(angle) * radius ;  // r * cos(a)
+        y = centerY + Math.sin(angle) * radius ;  // r * sin(a)
         ctx.beginPath() ;
-        ctx.moveTo(Math.random()*w, Math.random()*h) ;
-        ctx.lineTo(Math.random()*w, Math.random()*h) ;
-        ctx.stroke() ;
+        ctx.arc(x, y, 10, 0,  Math.PI * 2, false) ;
+        ctx.fill() ;
+        angle += speed ;
+        requestAnimationFrame(render) ; 
     }
 
-  
+
+
 
 };
 

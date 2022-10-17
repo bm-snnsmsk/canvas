@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="tr-TR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saat yörüngesinde hareket eden Daire</title>
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+        }
+        canvas{
+            display: block;
+        }
+        table{
+            margin: 0 0 50px 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="canvas" width="500" height="300"></canvas>
+    <p id="test"></p>
+    <table class="table" border="1">
+        <thead>
+          <tr>
+            <th>angle</th>
+            <th>slice</th>
+            <th>Math.cos(angle)</th>
+            <th>Math.sin(angle)</th>
+            <th>centerX + Math.cos(angle) * radius</th>
+            <th>centerX + Math.sin(angle) * radius</th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+
+        </tbody>
+      </table>
+
+<script>
+    // degrees = radians * 180 / Math.PI
+window.onload = function(){
+    let cnv = document.querySelector('#canvas') ,
+        ctx = cnv.getContext("2d")  ,
+        w = cnv.width = window.innerWidth ,
+        h = cnv.height = window.innerHeight ;
+    
+    let centerY = h * .5,
+        centerX = w * .5,
+        radius = 200,
+        angle = 0,
+        numObject = 12,
+        slice = Math.PI * 2 / numObject,
+        x, y;
+        
+        
+        let message = "" ;
+
+    for(let i = 0 ; i < numObject ; i++){
+        angle = slice * i ;
+        x = centerX + Math.cos(angle) * radius ;
+        y = centerY + Math.sin(angle) * radius ;
+        ctx.beginPath() ;
+        ctx.arc(x, y, 10, 0,  Math.PI * 2, false) ;
+        ctx.fill() ;
+        message += "<tr><td>"+angle+"</td><td>"+slice+"</td><td>"+Math.cos(angle)+"</td><td>"+Math.sin(angle)+"</td><td>"+x+"</td><td>"+y+"</td></tr>" ;
+    }
+
+        document.querySelector('#tbody').innerHTML = message ;
+  
+
+};
+
+</script>
+</body>
+</html>
+

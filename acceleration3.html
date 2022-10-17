@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="tr-TR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceleration</title>
+    <script src="js/vector.js"></script>
+    <script src="js/particle.js"></script>
+    <script src="js/main.js"></script>
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+        }
+        canvas{
+            display: block;
+        }
+        table{
+            margin: 0 0 50px 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="canvas" width="500" height="300"></canvas>
+    <p id="test"></p>
+  
+    
+
+<script>
+    // degrees = radians * 180 / Math.PI
+window.onload = function(){
+    let cnv = document.querySelector('#canvas') ,
+        ctx = cnv.getContext("2d")  ,
+        w = cnv.width = window.innerWidth ,
+        h = cnv.height = window.innerHeight ;
+
+    let ship = particle.create(w/2,h/2,0,0),
+        thrust = vector.create(0, 0) ;
+
+   
+   update() ;
+
+   
+    // tuş basılı iken
+    document.body.addEventListener('keydown' , function(e){
+         // console.log(e.keyCode) ; key code için
+         switch(e.keyCode){
+             case 37 : thrust.setX(-0.1) ; break ; // left
+             case 38 : thrust.setY(-0.1) ; break ; // up
+             case 39 : thrust.setX(0.1) ; break ;  // right
+             case 40 : thrust.setY(0.1) ; break ; // down
+             default : break ;
+         }
+    }) ;
+
+    // tuşlar serbest bırakıldıklarında
+    document.body.addEventListener('keyup' , function(e){
+           switch(e.keyCode){
+               case 37 : thrust.setX(0) ; break ; // left
+               case 38 : thrust.setY(0) ; break ; // up
+               case 39 : thrust.setX(0) ; break ;  // right
+               case 40 : thrust.setY(0) ; break ; // down
+               default : break ;
+           }
+      }) ;
+
+    function update(){
+        ctx.clearRect(0,0,w,h) ;
+ 
+        ship.accelerate(thrust) ;
+        ship.update();
+
+        ctx.beginPath() ;
+        ctx.arc(ship.position.getX(), ship.position.getY(), 10, 0, Math.PI * 2, false) ;
+        ctx.fill() ;             
+ 
+        if(ship.position.getX() > w){
+            ship.position.setX(0) ;
+        }
+        if(ship.position.getX() < 0){
+            ship.position.setX(w) ;
+        }
+        if(ship.position.getY() > h){
+            ship.position.setY(0) ;
+        }
+        if(ship.position.getY() < 0){
+            ship.position.setY(h) ;
+        }
+         
+        requestAnimationFrame(update) ;
+    }
+        
+
+}; 
+
+</script>
+</body>
+</html>
+

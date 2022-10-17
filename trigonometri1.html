@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>moveTo</title>
+    <title>Daire</title>
     <style>
         *{
             margin:0;
@@ -20,6 +20,7 @@
     <canvas id="canvas" width="500" height="300"></canvas>
 
 <script>
+    // degrees = radians * 180 / Math.PI
 window.onload = function(){
     let cnv = document.querySelector('#canvas') ,
         ctx = cnv.getContext("2d")  ,
@@ -27,12 +28,15 @@ window.onload = function(){
         h = cnv.height = window.innerHeight ;
 
 
+       
+       ctx.translate(w/2, h/2) ;
+       
 
-    for(let i=0; i<1000; i++){
-        ctx.beginPath() ;
-        ctx.moveTo(Math.random()*w, Math.random()*h) ;
-        ctx.lineTo(Math.random()*w, Math.random()*h) ;
-        ctx.stroke() ;
+
+    for(let angle = 0; angle < Math.PI * 2 ; angle+=.1){
+       let x = Math.cos(angle) * 100 ,  // dalganın yatay düzlemdeki genişliği
+           y = Math.sin(angle) * 100 ; // dalganın dikey düzlemdeki yüksekliği
+       ctx.fillRect(x, y, 3, 3) ;
     }
 
   

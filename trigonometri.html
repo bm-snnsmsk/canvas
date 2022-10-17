@@ -17,7 +17,7 @@
 </head>
 <body>
 
-    <canvas id="canvas" width="500" height="300"></canvas>
+    <canvas id="canvas" height="600"></canvas>
 
 <script>
     // degrees = radians * 180 / Math.PI
@@ -25,20 +25,35 @@ window.onload = function(){
     let cnv = document.querySelector('#canvas') ,
         ctx = cnv.getContext("2d")  ,
         w = cnv.width = window.innerWidth ,
-        h = cnv.height = window.innerWidth ;
+        h = cnv.height = window.innerHeight ;
 
 
        
-       ctx.translate(0, h/2) ;
-       // ctx.scale(1,-1) // dalgayı ters çevirir
+       ctx.translate(0, h/2) ; // ters sinus   dalge 
+       ctx.scale(1,-1) 
 
     for(let angle = 0; angle < Math.PI * 2 ; angle+=.01){
        // console.log('angle = '+ angle+ ' - Math.sin(angle) = '+Math.sin(angle)) ;
-       let x = angle * 100 ,
-       y = Math.sin(angle) * 100 ;
-       ctx.fillRect(x, y, 3, 3) ;
+      
 
+       // sinüs wave
+       ctx.beginPath();
+        ctx.fillStyle = "black";
+       let x = angle * 100 ,  // dalganın yatay düzlemdeki genişliği
+           y = Math.sin(angle) * 100 ; // dalganın dikey düzlemdeki yüksekliği
+        ctx.fillRect(x, y, 3, 3) ;
+
+
+        // cosinüs wave
+        ctx.beginPath();
+        ctx.fillStyle = "red";
+        let x2 = angle * 100 ,  // dalganın yatay düzlemdeki genişliği
+           y2 = Math.cos(angle) * 100 ; // dalganın dikey düzlemdeki yüksekliği
+        ctx.fillRect(x2, y2, 3, 3) ;
     }
+
+
+    
 
   
 

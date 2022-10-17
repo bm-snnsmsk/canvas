@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yatay Yönde Seken Top</title>
+    <title>rectangle-point Collision</title>
     <style>
         *{
             margin:0;
@@ -14,10 +14,14 @@
             display: block;
         }
     </style>
+       <script src="js/vector.js"></script>
+       <script src="js/particle.js"></script>
+       <script src="js/collision.js"></script>
 </head>
 <body>
 
     <canvas id="canvas" width="500" height="300"></canvas>
+    <p id="test"></p>
 
 <script>
     // degrees = radians * 180 / Math.PI
@@ -26,33 +30,25 @@ window.onload = function(){
         ctx = cnv.getContext("2d")  ,
         w = cnv.width = window.innerWidth ,
         h = cnv.height = window.innerHeight ;
-
-    let centerY = h * .5,
-        centerX = w * .5,
-        offset = h * .2, // y ekseninde tavan-taban 
-        speed = .1 , // topun sekme hızı
-        angle = 0 ;
+    
+   let rect = {
+        x: 300 ,
+        y: 200 ,
+        width : -200,
+        height : -100
+   } ;
         
-    render() ;
+    document.body.addEventListener('mousemove', function(event){
 
-    function render(){
-        let x = centerY + Math.sin(angle) * offset ;
-        ctx.clearRect(0,0,w,h) ;
-        ctx.beginPath() ;
-        ctx.arc(x, centerY, 30, 0,  Math.PI * 2, false) ;
-        ctx.fill() ;
-        angle += speed ;
-        requestAnimationFrame(render) ; 
-        // console.log(y) ;
-        // console.log(offset) ;
-        // console.log(angle) ;
-        // console.log("-----------") ;
-    }
-
-
-        
-  
-
+        if(collision.isRectPointCollision(event.clientX, event.clientY, rect)){
+            ctx.fillStyle = "#ff6666" ;
+        }else{
+            ctx.fillStyle = "#999999" ;
+        }
+    
+        ctx.clearRect(0, 0, w, h) ;
+        ctx.fillRect(rect.x, rect.y, rect.width, rect.height) ;
+    }) ;      
 };
 
 </script>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="tr-TR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rectangle-rectangle Collision</title>
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+        }
+        canvas{
+            display: block;
+        }
+    </style>
+       <script src="js/vector.js"></script>
+       <script src="js/particle.js"></script>
+       <script src="js/collision.js"></script>
+</head>
+<body>
+
+    <canvas id="canvas" width="500" height="300"></canvas>
+    <p id="test"></p>
+
+<script>
+    // degrees = radians * 180 / Math.PI
+window.onload = function(){
+    let cnv = document.querySelector('#canvas') ,
+        ctx = cnv.getContext("2d")  ,
+        w = cnv.width = window.innerWidth ,
+        h = cnv.height = window.innerHeight ;
+    
+   let rect0 = {
+        x: 300 ,
+        y: 200 ,
+        width : 200,
+        height : 100
+    } ;
+    let rect1 = {
+        x: 0 ,
+        y: 0 ,
+        width : 100,
+        height : 200
+   } ;
+        
+    document.body.addEventListener('mousemove', function(event){
+        rect1.x = event.clientX - 50; // mouse diktörgenin tam ortasında olması için
+        rect1.y = event.clientY - 100; // mouse diktörgenin tam ortasında olması için
+
+        if(collision.isRectRectCollision(rect0, rect1)){
+            ctx.fillStyle = "#ff6666" ;
+        }else{
+            ctx.fillStyle = "#999999" ;
+        }
+    
+        ctx.clearRect(0, 0, w, h) ;
+
+
+        ctx.beginPath() ;
+        ctx.fillRect(rect0.x, rect0.y, rect0.width, rect0.height) ;
+
+        ctx.beginPath() ;
+        ctx.fillRect(rect1.x, rect1.y, rect1.width, rect1.height) ;
+    }) ;      
+};
+
+</script>
+</body>
+</html>

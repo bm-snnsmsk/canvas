@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="tr-TR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bouncing Ball</title>
+</head>
+<body>
+ <canvas id="canvas" width="600" height="400"></canvas>   
+
+ <script>
+    // declare variables
+    const FPS = 30 ;
+    let bs = 30 ;
+    let px, py ;
+    let vx, vy ;
+
+    // load canvas
+    let cans  = document.querySelector('#canvas') ;
+    let ctx = cans.getContext("2d") ;
+
+    // setup interval  
+    setInterval(bounce, 1000 / FPS) ;
+   
+
+    // ball starting position
+    px = cans.width / 2 ;
+    py = cans.height / 2 ;
+
+    // random ball starting speed 
+    xv = Math.floor(Math.random() * 76 + 25) / FPS ;
+    yv = Math.floor(Math.random() * 76 + 25) / FPS ;
+
+    //random ball direction
+    if(Math.floor(Math.random() * 2) == 0){
+        xv = -xv ;
+    }
+    if(Math.floor(Math.random() * 2) == 0){
+        yv = -yv ;
+    }
+
+    // update function
+    function bounce(){
+        // move the ball
+        px += xv ;
+        py += yv ;
+
+        // bounce the ball off each wall
+        if(px - bs / 2 < 0 && xv < 0){
+            xv = -xv ;
+        }
+        if(px + bs / 2 > cans.width && xv > 0){
+            xv = -xv ;
+        }
+        if(py - bs / 2 < 0 && yv < 0){
+            yv = -yv ;
+        }
+        if(py + bs / 2 > cans.height && yv > 0){
+            yv = -yv ;
+        }
+
+        // draw the background
+        ctx.fillStyle = 'black' ;
+        ctx.fillRect(0, 0, cans.width, cans.height) ;
+        ctx.fillStyle = 'yellow' ;
+        ctx.fillRect(px - bs / 2, py - bs / 2, bs, bs);
+       /*  console.log(px) ;
+        console.log(py) ;
+        console.log(xv) ;
+        console.log(yv) ;
+        console.log("------------------") ;  */
+    }
+
+
+
+
+
+
+ </script>
+</body>
+</html>

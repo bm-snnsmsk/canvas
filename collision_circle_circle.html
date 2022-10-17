@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="tr-TR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circle-Circle Collision</title>
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+        }
+        canvas{
+            display: block;
+        }
+    </style>
+       <script src="js/vector.js"></script>
+       <script src="js/particle.js"></script>
+       <script src="js/collision.js"></script>
+</head>
+<body>
+
+    <canvas id="canvas" width="500" height="300"></canvas>
+    <p id="test"></p>
+
+<script>
+    // degrees = radians * 180 / Math.PI
+window.onload = function(){
+    let cnv = document.querySelector('#canvas') ,
+        ctx = cnv.getContext("2d")  ,
+        w = cnv.width = window.innerWidth ,
+        h = cnv.height = window.innerHeight ;
+    
+   let circle0 = {
+        x: Math.random() * w ,
+        y: Math.random() * h ,
+        radius : 50 + Math.random() * 100
+   } ;
+
+   let circle1 = {
+        x: Math.random() * w ,
+        y: Math.random() * h ,
+        radius : 50 + Math.random() * 100
+   } ;
+        
+    document.body.addEventListener('mousemove', function(event){
+        circle1.x = event.clientX ;
+        circle1.y = event.clientY ;
+
+        if(collision.isCircleCircleCollision(circle0, circle1)){
+            ctx.fillStyle = "#ff6666" ;
+        }else{
+            ctx.fillStyle = "#999999" ;
+        }
+    
+        ctx.clearRect(0, 0, w, h) ;
+
+        ctx.beginPath() ;
+        ctx.arc(circle0.x, circle0.y, circle0.radius, 0, Math.PI * 2, false) ;
+        ctx.fill() ;
+
+        ctx.beginPath() ;
+        ctx.arc(circle1.x, circle1.y, circle1.radius, 0, Math.PI * 2, false) ;
+        ctx.fill() ;
+    }) ;      
+};
+
+</script>
+</body>
+</html>

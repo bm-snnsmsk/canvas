@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>moveTo</title>
+    <title>acceleration</title>
+    <script src="js/vector.js"></script>
+    <script src="js/particle.js"></script>
+    <script src="js/main.js"></script>
     <style>
         *{
             margin:0;
@@ -13,32 +16,46 @@
         canvas{
             display: block;
         }
+        table{
+            margin: 0 0 50px 50px;
+        }
     </style>
 </head>
 <body>
 
     <canvas id="canvas" width="500" height="300"></canvas>
+    <p id="test"></p>
+  
+    
 
 <script>
+    // degrees = radians * 180 / Math.PI
 window.onload = function(){
     let cnv = document.querySelector('#canvas') ,
         ctx = cnv.getContext("2d")  ,
         w = cnv.width = window.innerWidth ,
         h = cnv.height = window.innerHeight ;
 
+    let p = particle.create(100, h, 10, -Math.PI / 2),
+        accel = vector.create(0.1, 0.1) ;
+   
+   update() ;
+   function update(){
+        ctx.clearRect(0,0,w,h) ;
 
-
-    for(let i=0; i<1000; i++){
+        p.accelerate(accel) ;
+        p.update() ;
         ctx.beginPath() ;
-        ctx.moveTo(Math.random()*w, Math.random()*h) ;
-        ctx.lineTo(Math.random()*w, Math.random()*h) ;
-        ctx.stroke() ;
-    }
+        ctx.arc(p.position.getX(), p.position.getY(), 10, 0, Math.PI * 2, false) ;
+        ctx.fill() ;
 
-  
+        requestAnimationFrame(update) ;
+   }
+        
 
-};
+}; 
 
 </script>
 </body>
 </html>
+

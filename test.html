@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yatay Yönde Seken Top</title>
+    <title>TEST</title>
     <style>
         *{
             margin:0;
@@ -13,48 +13,50 @@
         canvas{
             display: block;
         }
+        table{
+            margin: 0 0 50px 50px;
+        }
     </style>
 </head>
 <body>
 
     <canvas id="canvas" width="500" height="300"></canvas>
+    <p id="test"></p>
+  
+    
 
 <script>
     // degrees = radians * 180 / Math.PI
+    // radians = degree * Math.PI / 180
 window.onload = function(){
     let cnv = document.querySelector('#canvas') ,
         ctx = cnv.getContext("2d")  ,
         w = cnv.width = window.innerWidth ,
         h = cnv.height = window.innerHeight ;
-
-    let centerY = h * .5,
-        centerX = w * .5,
-        offset = h * .2, // y ekseninde tavan-taban 
-        speed = .1 , // topun sekme hızı
-        angle = 0 ;
+   
         
-    render() ;
 
-    function render(){
-        let x = centerY + Math.sin(angle) * offset ;
-        ctx.clearRect(0,0,w,h) ;
-        ctx.beginPath() ;
-        ctx.arc(x, centerY, 30, 0,  Math.PI * 2, false) ;
-        ctx.fill() ;
-        angle += speed ;
-        requestAnimationFrame(render) ; 
-        // console.log(y) ;
-        // console.log(offset) ;
-        // console.log(angle) ;
-        // console.log("-----------") ;
-    }
+ /*        
+   for(let angle = 0 ; angle <= 360 ; angle+=.1){
+    rad = angle * Math.PI / 180 ;
+    console.log(angle + " - "+Math.sin(rad)) ;
+   }
+ */
+ document.body.addEventListener('keydown' , function(e){
+        console.log(e.keyCode) ;
+        switch(e.keyCode){
+            case 37 :console.log("sol") ; break ; // left
+            case 38 : console.log("yukarı") ; break ; // up
+            case 39 : console.log("sağ") ; break ; // right
+            case 40 : console.log("aşağı") ; break ;  // down
+        }
+   }) ;
+   
+}
 
 
-        
-  
-
-};
 
 </script>
 </body>
 </html>
+
